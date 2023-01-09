@@ -10,7 +10,7 @@ pr:
 - main
 
 pool:
-  vmImage: ubuntu-20.04
+  vmImage: ubuntu-latest
 
 variables:
   PRISMA_API_URL: https://api.prismacloud.io
@@ -19,11 +19,13 @@ jobs:
 - job: Prisma_Cloud_Job
   displayName: Prisma Cloud Job
   steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: 3.8
-    displayName: 'Use Python 3.8'
-  - script: pip install checkov
-    displayName: Install Checkov
-  - script: checkov -d . --use-enforcement-rules --bc-api-key 8885d84f-9f12-40c5-96f2-74a112594202::GY494u6yPwHZWpDi2IxVUTivjoc= --repo-id FaCezar/terragoat --branch main 
-    displayName: Run Checkov
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8'
+  displayName: 'Install Python 3.8'
+- script: pip install checkov
+  displayName: 'Install Checkov'
+- script: checkov -d  . --use-enforcement-rules --bc-api-key 8885d84f-9f12-40c5-96f2-74a112594202::GY494u6yPwHZWpDi2IxVUTivjoc= --repo-id FaCezar/terragoat --branch <branch>
+  displayName: 'Scan with Prisma Cloud'
+  env:
+    PRISMA_API_URL: https://api.prismacloud.io
