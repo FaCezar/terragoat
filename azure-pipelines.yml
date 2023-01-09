@@ -25,7 +25,7 @@ jobs:
     displayName: 'Install Python 3.8'
   - script: pip install checkov
     displayName: 'Install Checkov'
-  - script: checkov -d  . --use-enforcement-rules --bc-api-key 8885d84f-9f12-40c5-96f2-74a112594202::GY494u6yPwHZWpDi2IxVUTivjoc= --repo-id FaCezar/terragoat --branch <branch>
+  - script: checkov -d  . --use-enforcement-rules --bc-api-key 8885d84f-9f12-40c5-96f2-74a112594202::GY494u6yPwHZWpDi2IxVUTivjoc= --repo-id FaCezar/terragoat --branch main
     displayName: 'Scan with Prisma Cloud'
     env:
       PRISMA_API_URL: https://api.prismacloud.io
